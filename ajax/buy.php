@@ -93,7 +93,7 @@ $email = "example@gmail.com";
      $message = "Your payment was successful";
       echo json_encode([
         "success" => true,
-        "payment" => $message,
+        "payment" => $message
       ]);
             
     }else{
