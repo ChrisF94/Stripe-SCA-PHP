@@ -1,6 +1,8 @@
 <html>
 <head>
 <title>Stripe SCA</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<script src="//code.jquery.com/jquery-1.9.1.js"></script>
 <style>
 .StripeElement {
   background-color: white;
@@ -37,7 +39,7 @@
 </body>
 <script src="https://js.stripe.com/v3/"></script>
 <script>
-var stripe = Stripe('pk_test_XXXXXXXXXXX');
+var stripe = Stripe('pk_test_7wfckSiqfZNjmsVhRjqSDV6z');
 var elements = stripe.elements();
 var style = {
     base: {
@@ -56,7 +58,6 @@ var style = {
 };
 var cardElement = elements.create('card', {style: style});
 cardElement.mount('#card-element');
-
 cardElement.addEventListener('change', function(event) {
     var displayError = document.getElementById('card-errors');
 if (event.error) {
@@ -66,13 +67,10 @@ if (event.error) {
         $("#card-errors").removeClass("feedback error");
     }
 });
-
 var product = document.getElementById('product');
 var cardButton = document.getElementById('card-button');
 var displayError = document.getElementById('card-errors');
-
 cardButton.addEventListener('click', function(ev) {
-
     stripe.createPaymentMethod('card', cardElement, {
     }).then(function(result) {
     //cardElement.clear();
@@ -94,15 +92,12 @@ cardButton.addEventListener('click', function(ev) {
     }
   });
 }, {once : true});
-
-
 function handleServerResponse(response) {
    
   if (response.error) {
         $("#card-errors").addClass("feedback error");
         displayError.textContent = response.error;
   } else if (response.requires_action) {
-
     stripe.handleCardAction(
         
       response.payment_intent_client_secret
@@ -111,7 +106,6 @@ function handleServerResponse(response) {
       if (response.error) {
           $("#card-errors").addClass("feedback error");
         displayError.textContent = response.error;
-
       } else {
         // The card action has been handled
         // The PaymentIntent can be confirmed again on the server
@@ -119,7 +113,6 @@ function handleServerResponse(response) {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ payment_intent_id: result.paymentIntent.id })
-
         }).then(function(confirmResult) {
           return confirmResult.json();
         }).then(handleServerResponse);
