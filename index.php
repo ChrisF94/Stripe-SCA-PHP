@@ -83,7 +83,7 @@ cardButton.addEventListener('click', function(ev) {
       fetch('ajax/buy.php', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ payment_method_id: result.paymentMethod.id, product: $('input[name=product]:checked').val() })
+        body: JSON.stringify({ payment_method_id: result.paymentMethod.id })
         
       }).then(function(result) {
         // Handle server response (see Step 3)
@@ -118,7 +118,7 @@ function handleServerResponse(response) {
         fetch('ajax/buy.php', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ payment_intent_id: result.paymentIntent.id, product: $('input[name=product]:checked').val() })
+          body: JSON.stringify({ payment_intent_id: result.paymentIntent.id })
 
         }).then(function(confirmResult) {
           return confirmResult.json();
