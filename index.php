@@ -39,7 +39,7 @@
 </body>
 <script src="https://js.stripe.com/v3/"></script>
 <script>
-var stripe = Stripe('pk_test_7wfckSiqfZNjmsVhRjqSDV6z');
+var stripe = Stripe('pk_test_XXXXXXXX');
 var elements = stripe.elements();
 var style = {
     base: {
